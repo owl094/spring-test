@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-test
+  devtools:
+    restart:
+      enabled: true
