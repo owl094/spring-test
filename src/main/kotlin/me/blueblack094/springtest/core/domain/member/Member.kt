@@ -1,18 +1,13 @@
 package me.blueblack094.springtest.core.domain.member
 
-import com.github.f4b6a3.uuid.UuidCreator
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.Id
 import jakarta.persistence.Table
-import java.util.*
+import me.blueblack094.springtest.core.domain.base.BaseEntity
 
 @Entity
 @Table(name = "member")
 class Member protected constructor(
-    @Id
-    val id: UUID = UuidCreator.getTimeOrderedEpoch(),
-
     @Column(nullable = false)
     var name: String,
 
@@ -27,7 +22,7 @@ class Member protected constructor(
 
     @Column(nullable = false, unique = true, length = 13)
     var phone: String
-) {
+) : BaseEntity() {
     companion object {
         fun create(
             name: String,
