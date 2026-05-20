@@ -62,7 +62,7 @@ class SecurityConfig(
                     .authenticated()
             }
             .addFilterBefore(
-                JwtAuthenticationFilter(jwtTokenProvider),
+                SecurityJwtAuthenticationFilter(jwtTokenProvider),
                 UsernamePasswordAuthenticationFilter::class.java
             )
 

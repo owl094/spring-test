@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 
-class JwtAuthenticationFilter(
+class SecurityJwtAuthenticationFilter(
     private val jwtTokenProvider: SecurityJwtTokenProvider
 ) : OncePerRequestFilter() {
     override fun doFilterInternal(
