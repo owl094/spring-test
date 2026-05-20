@@ -21,22 +21,35 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-h2console")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-restclient")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webmvc")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("tools.jackson.module:jackson-module-kotlin")
+    // UUID
     implementation("com.github.f4b6a3:uuid-creator:5.3.7")
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.13.0")
+    implementation("io.jsonwebtoken:jjwt-impl:0.13.0")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.13.0")
+    // dev tools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    // h2
+    implementation("org.springframework.boot:spring-boot-h2console")
     runtimeOnly("com.h2database:h2")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    // data jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
+    // rest client
+    implementation("org.springframework.boot:spring-boot-starter-restclient")
     testImplementation("org.springframework.boot:spring-boot-starter-restclient-test")
+    // security
+    implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.boot:spring-boot-starter-security-test")
+    // web mvc
+    implementation("org.springframework.boot:spring-boot-starter-webmvc")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+    // validator
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    // Test ETC
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

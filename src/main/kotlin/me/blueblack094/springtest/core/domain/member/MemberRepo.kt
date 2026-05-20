@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface MemberRepo : JpaRepository<Member, UUID> {
+    fun findByEmail(email: String): Member?
 }

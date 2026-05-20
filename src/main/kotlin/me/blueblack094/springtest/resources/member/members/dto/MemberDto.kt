@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.resources.members.dto
+package me.blueblack094.springtest.resources.member.members.dto
 
 import java.util.*
 

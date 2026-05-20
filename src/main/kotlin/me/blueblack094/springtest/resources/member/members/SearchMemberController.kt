@@ -1,7 +1,7 @@
-package me.blueblack094.springtest.resources.members
+package me.blueblack094.springtest.resources.member.members
 
 import me.blueblack094.springtest.core.domain.member.MemberRepo
-import me.blueblack094.springtest.resources.members.dto.MemberDto
+import me.blueblack094.springtest.resources.member.members.dto.MemberDto
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

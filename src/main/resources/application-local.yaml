@@ -8,3 +8,8 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+
+  security:
+    jwt:
+      secret: "dGVzdC1wcm9qZWN0LWpzb24td2ViLXRva2Vu"
+      expiredAtMillis: 3600000

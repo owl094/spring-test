@@ -22,6 +22,9 @@ class Member protected constructor(
     @Column(nullable = false, unique = true)
     var email: String,
 
+    @Column(nullable = false)
+    val password: String,
+
     @Column(nullable = false, unique = true, length = 13)
     var phone: String
 ) {
@@ -30,12 +33,14 @@ class Member protected constructor(
             name: String,
             age: Int,
             email: String,
+            password: String,
             phone: String,
         ): Member {
             return Member(
                 name = name,
                 age = age,
                 email = email,
+                password = password,
                 phone = phone,
             )
         }
