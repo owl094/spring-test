@@ -1,9 +1,14 @@
 package me.blueblack094.springtest.core.domain.member
 
-import org.springframework.http.HttpStatusCode
-import org.springframework.web.client.HttpClientErrorException
+import me.blueblack094.springtest.core.global.exception.BaseException
+import org.springframework.http.HttpStatus
 
-class MemberNotFoundException : HttpClientErrorException(
-    HttpStatusCode.valueOf(400),
-    "Member not found"
+class MemberNotFoundException(
+    code: String = "MEMBER_NOT_FOUND",
+    status: HttpStatus = HttpStatus.BAD_REQUEST,
+    override val message: String = "Member not found",
+) : BaseException(
+    code = code,
+    status = status,
+    message = message,
 )
