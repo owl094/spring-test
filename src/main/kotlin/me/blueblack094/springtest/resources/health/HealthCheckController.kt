@@ -1,12 +1,13 @@
 package me.blueblack094.springtest.resources.health
 
+import me.blueblack094.springtest.core.global.http.CustomResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class HealthCheckController {
     @GetMapping("/")
-    fun healthCheck(): String {
-        return "OK"
+    fun healthCheck(): CustomResponseEntity<String> {
+        return CustomResponseEntity(data = "OK")
     }
 }

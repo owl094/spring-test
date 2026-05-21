@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotNull
 import me.blueblack094.springtest.core.domain.member.MemberNotFoundException
 import me.blueblack094.springtest.core.domain.member.MemberRepo
+import me.blueblack094.springtest.core.global.http.CustomResponseEntity
 import me.blueblack094.springtest.core.global.security.SecurityJwtTokenProvider
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -29,7 +30,7 @@ class SignInController(
     @PostMapping("/signin")
     fun signIn(
         @RequestBody @Valid req: SignInRequest
-    ): String {
+    ): CustomResponseEntity<String> {
         val authentication =
             UsernamePasswordAuthenticationToken(req.email, req.password)
                 .let(authenticationManager::authenticate)
@@ -43,6 +44,6 @@ class SignInController(
             userId = member.id.toString()
         )
 
-        return jwtToken
+        return CustomResponseEntity(data = jwtToken)
     }
 }

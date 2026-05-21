@@ -1,6 +1,7 @@
 package me.blueblack094.springtest.resources.member.members
 
 import me.blueblack094.springtest.core.domain.member.MemberRepo
+import me.blueblack094.springtest.core.global.http.CustomResponseEntity
 import me.blueblack094.springtest.resources.member.members.dto.MemberDto
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -10,7 +11,7 @@ class SearchMemberController(
     private val memberRepo: MemberRepo
 ) {
     @GetMapping("/members")
-    fun search(): List<MemberDto> {
+    fun search(): CustomResponseEntity<List<MemberDto>> {
         val members = memberRepo.findAll()
 
         val memberDtos = members.map {
@@ -23,6 +24,6 @@ class SearchMemberController(
             )
         }
 
-        return memberDtos
+        return CustomResponseEntity(data = memberDtos)
     }
 }

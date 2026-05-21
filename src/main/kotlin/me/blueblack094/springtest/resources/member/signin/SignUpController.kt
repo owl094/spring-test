@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import me.blueblack094.springtest.core.domain.member.Member
 import me.blueblack094.springtest.core.domain.member.MemberRepo
+import me.blueblack094.springtest.core.global.http.CustomResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -38,7 +39,7 @@ class SignUpController(
     @PostMapping("/signup")
     fun signup(
         @RequestBody @Valid req: SignUpRequest
-    ): UUID {
+    ): CustomResponseEntity<String> {
         val encodedPassword = passwordEncoder.encode(req.password)!!
 
         val member = Member.create(
@@ -51,6 +52,6 @@ class SignUpController(
 
         memberRepo.save(member)
 
-        return member.id
+        return CustomResponseEntity(data = member.id.toString())
     }
 }
