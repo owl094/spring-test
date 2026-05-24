@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 class SecurityConfig(
-    private val jwtTokenProvider: SecurityJwtTokenProvider
+    private val securityJwtAuthenticationFilter: SecurityJwtAuthenticationFilter,
 ) {
     @Bean
     fun passwordEncoder(): PasswordEncoder {
@@ -45,27 +45,25 @@ class SecurityConfig(
             "/signin",
         )
 
-        http
-            .csrf { it.disable() }
-            .headers {
+        return http.apply {
+            csrf { it.disable() }
+            headers {
                 //  H2 콘솔 iframe 허용을 위한 설정
                 it.frameOptions { frameOptions -> frameOptions.sameOrigin() }
             }
-            .sessionManagement { sm ->
+            sessionManagement {
                 // 세션 사용 안 함 -> JWT로 대체
-                sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            .authorizeHttpRequests { authorize ->
-                authorize
+            authorizeHttpRequests {
+                it
                     .requestMatchers(*publicPaths).permitAll()
-                    .anyRequest()
-                    .authenticated()
+                    .anyRequest().authenticated()
             }
-            .addFilterBefore(
-                SecurityJwtAuthenticationFilter(jwtTokenProvider),
+            addFilterBefore(
+                securityJwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter::class.java
             )
-
-        return http.build()
+        }.build()
     }
 }

@@ -1,6 +1,5 @@
 TODO:
 
-- 시큐리티 필터 레이어에서 JWT 만료로 인한 접근 실패시 클라가 식별 가능한 Error Key를 Body에 넣어주기
 - Sort model 구현
 - Swagger 적용하기
 - QueryDSL 기반 동적쿼리 Search 처리하기
