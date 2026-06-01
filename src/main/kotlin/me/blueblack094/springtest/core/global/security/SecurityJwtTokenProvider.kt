@@ -43,40 +43,37 @@ class SecurityJwtTokenProvider(
     }
 
     fun getAuthentication(token: String): Authentication {
-        val claims = Jwts.parser()
-            .verifyWith(secretKey)
-            .build()
-            .parseSignedClaims(token)
-            .payload
-
-        val userId = claims["userId"].toString()
-        val roles = claims["roles"] as? List<*> ?: emptyList<String>()
-        val authorities = roles.map { SimpleGrantedAuthority(it.toString()) }
-
-        val principal = User(
-            userId,
-            "",
-            authorities
-        )
-
-        return UsernamePasswordAuthenticationToken(
-            principal,
-            token,
-            authorities
-        )
-    }
-
-    fun validateToken(
-        token: String,
-    ): Boolean {
-        try {
-            Jwts.parser()
+        val (userId, authorities) = run {
+            Jwts
+                .parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
-            return true
-        } catch (_: Exception) {
-            return false
+                .payload
+        }.let { claims ->
+            val userId = claims["userId"].toString()
+            val roles = claims["roles"] as? List<*> ?: emptyList<String>()
+            val authorities = roles.map { role -> SimpleGrantedAuthority(role.toString()) }
+
+            Pair(userId, authorities)
         }
+
+        return UsernamePasswordAuthenticationToken(
+            User(userId, "", authorities),
+            token,
+            authorities
+        )
+
+    }
+
+    fun validateTokenOrThrow(
+        token: String,
+    ): Boolean {
+        Jwts.parser()
+            .verifyWith(secretKey)
+            .build()
+            .parseSignedClaims(token)
+
+        return true
     }
 }

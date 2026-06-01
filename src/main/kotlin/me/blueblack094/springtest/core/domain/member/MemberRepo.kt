@@ -1,8 +1,12 @@
 package me.blueblack094.springtest.core.domain.member
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface MemberRepo : JpaRepository<Member, UUID> {
     fun findByEmail(email: String): Member?
+
+    fun findAllByEmail(email: String, page: Pageable): Page<Member>
 }

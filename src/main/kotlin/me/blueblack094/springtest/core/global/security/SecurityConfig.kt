@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 class SecurityConfig(
-    private val jwtTokenProvider: SecurityJwtTokenProvider
+    private val securityJwtAuthenticationFilter: SecurityJwtAuthenticationFilter,
 ) {
     @Bean
     fun passwordEncoder(): PasswordEncoder {
@@ -34,38 +34,25 @@ class SecurityConfig(
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        val publicPaths = arrayOf(
-            // 헬스체크 경로
-            "/",
-            // 디테일한 에러 표시 (개발 단계)
-            "/error",
-            // H2 콘솔 허용 (개발 단계)
-            "/h2-console/**",
-            "/signup",
-            "/signin",
-        )
-
-        http
-            .csrf { it.disable() }
-            .headers {
+        return http.apply {
+            csrf { it.disable() }
+            headers {
                 //  H2 콘솔 iframe 허용을 위한 설정
                 it.frameOptions { frameOptions -> frameOptions.sameOrigin() }
             }
-            .sessionManagement { sm ->
+            sessionManagement {
                 // 세션 사용 안 함 -> JWT로 대체
-                sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            .authorizeHttpRequests { authorize ->
-                authorize
-                    .requestMatchers(*publicPaths).permitAll()
-                    .anyRequest()
-                    .authenticated()
+            authorizeHttpRequests {
+                it
+                    .requestMatchers(*SecurityPaths.PUBLIC_PATHS).permitAll()
+                    .anyRequest().authenticated()
             }
-            .addFilterBefore(
-                SecurityJwtAuthenticationFilter(jwtTokenProvider),
+            addFilterBefore(
+                securityJwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter::class.java
             )
-
-        return http.build()
+        }.build()
     }
 }
