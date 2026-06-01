@@ -1,0 +1,41 @@
+package me.blueblack094.springtest.core.global.security
+
+import me.blueblack094.springtest.core.domain.base.ExceptionMetadata
+import me.blueblack094.springtest.core.global.exception.BaseException
+import org.springframework.http.HttpStatus
+
+class ExpiredAccessTokenException(
+    code: String = "EXPIRED_ACCESS_TOKEN",
+    status: HttpStatus = HttpStatus.UNAUTHORIZED,
+    override val message: String = "Expired Access Token",
+) : BaseException(
+    code = code,
+    status = status,
+    message = message,
+)
+
+class CustomUnauthorizedException : BaseException(
+    code = CODE,
+    status = HTTP_STATUS,
+    message = MESSAGE,
+) {
+    companion object : ExceptionMetadata {
+        override val CODE = "UNAUTHORIZED"
+        override val MESSAGE = "UNAUTHORIZED"
+        override val DESCRIPTION = "$CODE: $MESSAGE"
+        override val HTTP_STATUS = HttpStatus.UNAUTHORIZED
+    }
+}
+
+class CustomForbiddenException : BaseException(
+    code = CODE,
+    status = HTTP_STATUS,
+    message = MESSAGE,
+) {
+    companion object : ExceptionMetadata {
+        override val CODE = "FORBIDDEN"
+        override val MESSAGE = "FORBIDDEN"
+        override val DESCRIPTION = "$CODE: $MESSAGE"
+        override val HTTP_STATUS = HttpStatus.FORBIDDEN
+    }
+}
