@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull
 import me.blueblack094.springtest.core.domain.member.MemberNotFoundException
 import me.blueblack094.springtest.core.domain.member.MemberRepo
 import me.blueblack094.springtest.core.global.http.CustomResponseEntity
-import me.blueblack094.springtest.core.global.http.swagger.ApiExceptions
+import me.blueblack094.springtest.core.global.http.swagger.CustomApiExceptions
 import me.blueblack094.springtest.core.global.security.SecurityJwtTokenProvider
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -32,7 +32,7 @@ class SignInController(
 ) {
     @Operation(summary = "로그인")
     @ApiResponse(responseCode = "200")
-    @ApiExceptions(
+    @CustomApiExceptions(
         MemberNotFoundException::class,
     )
     @PostMapping("/signin")

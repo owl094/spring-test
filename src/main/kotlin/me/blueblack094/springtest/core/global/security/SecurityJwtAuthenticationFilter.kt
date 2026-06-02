@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import tools.jackson.databind.ObjectMapper
 
+
 /**
  * JWT 인증 필터
  */
@@ -27,7 +28,13 @@ class SecurityJwtAuthenticationFilter(
         message = "UNAUTHORIZED"
     )
 
-    private val expiredAccessTokenException = ExpiredAccessTokenException()
+    private val expiredSecurityTokenException = ExpiredSecurityTokenException()
+
+    override fun shouldNotFilter(request: HttpServletRequest): Boolean {
+        return SecurityPaths.PUBLIC_PATHS.any {
+            it == request.servletPath
+        }
+    }
 
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -47,7 +54,7 @@ class SecurityJwtAuthenticationFilter(
             // 만료된 토큰인 경우
             sendErrorResponse(
                 response = response,
-                exception = expiredAccessTokenException
+                exception = expiredSecurityTokenException
             )
         } catch (_: Exception) {
             sendErrorResponse(

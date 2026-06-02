@@ -4,10 +4,10 @@ import me.blueblack094.springtest.core.domain.base.ExceptionMetadata
 import me.blueblack094.springtest.core.global.exception.BaseException
 import org.springframework.http.HttpStatus
 
-class ExpiredAccessTokenException(
-    code: String = "EXPIRED_ACCESS_TOKEN",
+class ExpiredSecurityTokenException(
+    code: String = "EXPIRED_SECURITY_TOKEN",
     status: HttpStatus = HttpStatus.UNAUTHORIZED,
-    override val message: String = "Expired Access Token",
+    override val message: String = "Expired Security Token",
 ) : BaseException(
     code = code,
     status = status,
