@@ -1,7 +1,6 @@
 TODO:
 
 - Sort model 구현
-- Swagger 적용하기
 - QueryDSL 기반 동적쿼리 Search 처리하기
 - RestClient로 외부 API 호출 방식 확인하기
 - 구조적 로그 구조 잡고 로거 적용하기 (로깅시 민감정보 마스킹 방법 찾아보기)
