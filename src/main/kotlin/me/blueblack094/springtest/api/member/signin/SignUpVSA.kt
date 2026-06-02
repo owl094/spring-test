@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.resources.member.signin
+package me.blueblack094.springtest.api.member.signin
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Email
@@ -31,7 +31,7 @@ data class SignUpRequest(
 )
 
 @RestController
-class SignUpController(
+class SignUpVSA(
     private val memberRepo: MemberRepo,
     private val passwordEncoder: PasswordEncoder
 ) {

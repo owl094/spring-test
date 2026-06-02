@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.resources.member.signin
+package me.blueblack094.springtest.api.member.signin
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -25,7 +25,7 @@ data class SignInRequest(
 )
 
 @RestController
-class SignInController(
+class SignInVSA(
     private val authenticationManager: AuthenticationManager,
     private val jwtTokenProvider: SecurityJwtTokenProvider,
     private val memberRepo: MemberRepo

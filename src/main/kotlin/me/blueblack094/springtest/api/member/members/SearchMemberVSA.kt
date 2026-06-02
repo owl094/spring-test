@@ -1,15 +1,15 @@
-package me.blueblack094.springtest.resources.member.members
+package me.blueblack094.springtest.api.member.members
 
+import me.blueblack094.springtest.api.member.members.dto.MemberDto
 import me.blueblack094.springtest.core.domain.member.MemberRepo
 import me.blueblack094.springtest.core.global.http.CustomResponseEntity
 import me.blueblack094.springtest.core.global.pagination.OffsetPage
-import me.blueblack094.springtest.resources.member.members.dto.MemberDto
 import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class SearchMemberController(
+class SearchMemberVSA(
     private val memberRepo: MemberRepo
 ) {
     @GetMapping("/members")
