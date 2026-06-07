@@ -1,5 +1,9 @@
 package me.blueblack094.springtest.core.global.http.swagger
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect
+import com.fasterxml.jackson.annotation.PropertyAccessor
+import io.swagger.v3.core.jackson.ModelResolver
+import io.swagger.v3.core.util.Json
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.annotations.security.SecurityScheme
 import io.swagger.v3.oas.models.media.Content
@@ -70,5 +74,29 @@ class SwaggerConfig {
 
             operation
         }
+    }
+
+    @Bean
+    fun modelResolver(): ModelResolver {
+        // Swagger가 모델을 분석할 때 사용할 ObjectMapper
+        val objectMapper = Json.mapper().copy()
+            .apply {
+                // Getter 탐색을 완전히 끄고, 오직 실제 Field(변수명)만 보도록 설정 강제
+                // isRead() 메서드가 아닌 'isRead' 필드명 자체 파싱
+                setVisibility(
+                    PropertyAccessor.FIELD,
+                    JsonAutoDetect.Visibility.ANY
+                )
+                setVisibility(
+                    PropertyAccessor.GETTER,
+                    JsonAutoDetect.Visibility.NONE
+                )
+                setVisibility(
+                    PropertyAccessor.IS_GETTER,
+                    JsonAutoDetect.Visibility.NONE
+                )
+            }
+
+        return ModelResolver(objectMapper)
     }
 }
