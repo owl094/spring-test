@@ -56,11 +56,15 @@ class SecurityJwtAuthenticationFilter(
                 objectMapper = objectMapper,
                 exception = expiredSecurityTokenException
             )
-        } catch (_: Exception) {
-            // 만료된 토큰인 경우
+        } catch (e: Exception) {
+            println(e)
             response.writeErrorResponse(
                 objectMapper = objectMapper,
-                exception = defaultAuthException
+                exception = BaseException(
+                    code = "UNKNOWN",
+                    status = HttpStatus.INTERNAL_SERVER_ERROR,
+                    message = e.message!!
+                )
             )
         }
     }
