@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.api.member.signin
+package me.blueblack094.springtest.presentation.member.signin
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse

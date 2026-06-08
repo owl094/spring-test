@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.api.health
+package me.blueblack094.springtest.presentation.health
 
 import me.blueblack094.springtest.core.global.http.CustomResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.api.member.members.dto
+package me.blueblack094.springtest.presentation.member.members.dto
 
 import me.blueblack094.springtest.core.domain.member.Member
 import java.util.*

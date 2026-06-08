@@ -1,4 +1,4 @@
-package me.blueblack094.springtest.api.member.signin
+package me.blueblack094.springtest.presentation.member.signin
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Email

@@ -8,6 +8,10 @@ object SecurityPaths {
         "/error",
         // H2 콘솔 허용 (개발 단계)
         "/h2-console/**",
+        // swagger
+        "/swagger-ui/**",
+        "/v3/api-docs/**",
+        //
         "/signup",
         "/signin",
     )
